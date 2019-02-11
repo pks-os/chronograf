@@ -27,7 +27,7 @@ export const renderTemplatesInScript = async (
     upperDashboardTime = new Date().toISOString()
   }
 
-  let rendered = `${DASHBOARD_TIME} = ${dashboardTime}\n${UPPER_DASHBOARD_TIME} = ${upperDashboardTime}\n\n${script}`
+  let rendered = `\n${DASHBOARD_TIME} = ${dashboardTime}\n${UPPER_DASHBOARD_TIME} = ${upperDashboardTime}\n\n${script}`
 
   if (!script.match(INTERVAL_REGEX)) {
     return rendered
@@ -38,6 +38,7 @@ export const renderTemplatesInScript = async (
   try {
     duration = await getMinDuration(astLink, rendered)
   } catch (error) {
+    console.error(error)
     duration = DEFAULT_DURATION_MS
   }
 
